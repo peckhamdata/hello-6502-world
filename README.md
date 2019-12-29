@@ -9,15 +9,20 @@ Starting with the Commodore 64:
 
 ![Commodore 64](assets/hello-world-c64.png)
 
-And the VIC 20:
+VIC 20:
 
 ![VIC 20](assets/hello-world-vic20.png)
+
+And Atari 8-bit:
+
+![A8](assets/hello-world-a8.png)
 
 # Usage
 
 Install depenencies with `install_tools.sh` then make with:
 
-* `C64` - `make EMU=x64 PLATFORM=C64` then type `RUN` in the emulator.
+* `C64` - `make EMU=x64 PLATFORM=C64`.
 * `VIC 20` - `make EMU=xvic PLATFORM=VIC20` then type `SYS 4352` in the emulator.
+* 'Atari 8-bit' - `make PLATFORM=ATARI EMU=Atari800MacX PACKAGE=xex`
 
 You'll need to `make clean` when switching platforms.
