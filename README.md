@@ -23,6 +23,6 @@ Install depenencies with `install_tools.sh` then make with:
 
 * `C64` - `make EMU=x64 PLATFORM=C64`.
 * `VIC 20` - `make EMU=xvic PLATFORM=VIC20` then type `SYS 4352` in the emulator.
-* 'Atari 8-bit' - `make PLATFORM=ATARI EMU=Atari800MacX PACKAGE=xex`
+* `Atari 8-bit` - `make PLATFORM=ATARI EMU=Atari800MacX PACKAGE=xex`
 
 You'll need to `make clean` when switching platforms.
