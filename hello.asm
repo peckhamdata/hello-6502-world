@@ -1,3 +1,13 @@
+#if PLATFORM_BEEB
+    .var oswrch = $ffee
+    .var screen = $7c28
+    *=$2000
+    lda #$16
+    jsr oswrch
+    lda #$07
+    jsr oswrch
+#endif
+
 #if PLATFORM_VIC20
     .var screen = $1e00
     *=$1100
@@ -11,6 +21,7 @@
 #if PLATFORM_ATARI
     .var screen = $2114
     .var sdlstl = $0230 // SET DISPLAY LIST ADRESS
+
     *= $a000
 
 // ***STARTING ADRESS OF THE DISPLAY LIST IN RAM***
@@ -42,17 +53,14 @@ exit:       jmp exit
 msg_len:    .byte $0c
 
 message:    
-            #if PLATFORM_ATARI
-                // This is a hack to get round the fact that
-                // the text directive uses Commodore encoding
-                // TODO: make it less hacky - define a KickAss function?
-                .byte $68, $65, $6c, $6c, $6f, $00, $77, $6f, $72, $6c, $64, $01
-            #else
+            #if PLATFORM_C64 || PLATFORM_VIC20
                 .text "hello world!"
+            #else
+                .byte $68, $65, $6c, $6c, $6f, $00, $77, $6f, $72, $6c, $64, $01
             #endif
 
 #if PLATFORM_ATARI
-
+            // Display List
 dlist:      .byte 112 // Blank 8 lines
             .byte 112 // Blank 8 lines
             .byte 112 // Blank 8 lines
