@@ -40,13 +40,20 @@ listl:      lda dlist,x
 
 #endif
 
+#if PLATFORM_APPLEII
+.var screen = $0500
+    *=$0803
+#endif
+
 start:      ldx #$00
 loop:       lda message,x
+            #if PLATFORM_APPLEII
+                ora #$80
+            #endif
             sta screen,x
             inx
             cpx msg_len
-            beq exit
-            jmp loop
+            bne loop
 
 exit:       jmp exit
 
@@ -55,7 +62,11 @@ msg_len:    .byte $0c
 message:    
             #if PLATFORM_C64 || PLATFORM_VIC20
                 .text "hello world!"
-            #else
+            #endif
+            #if PLATFORM_APPLEII
+                .byte $68, $65, $6c, $6c, $6f, $20, $77, $6f, $72, $6c, $64, $21
+            #endif
+            #if PLATFORM_ATARI || PLATFORM_BEEB
                 .byte $68, $65, $6c, $6c, $6f, $00, $77, $6f, $72, $6c, $64, $01
             #endif
 

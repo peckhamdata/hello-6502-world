@@ -6,31 +6,31 @@ PRG2BBC=$(BEEB_HOME)/bin/prg2bbc.py
 CREATE_SSD=$(BEEB_HOME)/bin/ssd_create.py
 PROG=hello
 EMU=x64
-PLATFORM=C64
-PACKAGE=d64
+PLATFORM=C64 # APPLEII
+PACKAGE=d64 # dsk
 OBJ=prg
 
 .PHONY: deploy clean
 
 deploy:$(PROG).$(PACKAGE)
-ifeq ($(EMU), Atari800MacX)
-	open $(PROG).$(PACKAGE)
-endif
-ifeq ($(EMU), BeebEm)
-	open $(PROG).$(PACKAGE)
+ifeq ($(PLATFORM), C64)
+	EMU_OPTS='-autostart'
 else
-	$(EMU) -autostart $(PROG).d64
+	EMU_OPTS='-autoload'	
 endif
+	$(EMU) $(EMU_OPTS) $(PROG).$(PACKAGE)
 
-$(PROG).$(PACKAGE):$(PROG).$(OBJ)
-ifeq ($(PACKAGE), xex)
+# Atari
+
+$(PROG).xex: $(PROG).prg
 	prg2xex < $(PROG).prg > $(PROG).xex
-else
-	$(C1541) -format $(PROG),1 d64 $(PROG).d64 -attach $(PROG).d64 -write $(PROG).prg 
-endif
 
-$(PROG).$(OBJ):$(PROG).asm *.asm
-	java -jar $(KICKASS_JAR) -define PLATFORM_$(PLATFORM) $(KICKASS_OPTS) $(PROG).asm
+# C64, VIC
+
+$(PROG).d64: $(PROG).prg
+	$(C1541) -format $(PROG),1 d64 $(PROG).d64 -attach $(PROG).d64 -write $(PROG).prg 
+
+# Beeb
 
 $(PROG).ssd: $(PROG).inf $$.\!Boot
 	# Create boot file / inf
@@ -46,6 +46,23 @@ $$.\!Boot: $(PROG).prg
 Boot.inf:
 	echo $.!Boot 00000000 ffffffff > $$.\!Boot.inf
 
+# Apple II
+
+$(PROG).dsk: resources/appleii/blank.dsk loader.txt $(PROG).bin
+	cp resources/appleii/blank.dsk $(PROG).dsk
+	java -jar $(AC_JAR) -bas $(PROG).dsk HELLO < loader.txt
+	java -jar $(AC_JAR) -dos $(PROG).dsk TEST B < $(PROG).bin
+
+$(PROG).bin: $(PROG).b2
+	dd bs=1 skip=2 if=$(PROG).b2 of=$(PROG).bin
+$(PROG).b2: $(PROG).prg	
+	prg2xex < $(PROG).prg > $(PROG).b2
+
+# All
+
+$(PROG).$(OBJ):$(PROG).asm *.asm
+	java -jar $(KICKASS_JAR) -define PLATFORM_$(PLATFORM) $(KICKASS_OPTS) $(PROG).asm
+
 clean:
 	rm -f *.prg
 	rm -f *.d64
@@ -53,4 +70,6 @@ clean:
 	rm -f *.xex
 	rm -f *.inf
 	rm -f *.ssd
+	rm -f *.bin
+	rm -f *.dsk
 	rm -f $$.*
