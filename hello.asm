@@ -47,9 +47,6 @@ listl:      lda dlist,x
 
 start:      ldx #$00
 loop:       lda message,x
-            #if PLATFORM_APPLEII
-                ora #$80
-            #endif
             sta screen,x
             inx
             cpx msg_len
@@ -64,7 +61,7 @@ message:
                 .text "hello world!"
             #endif
             #if PLATFORM_APPLEII
-                .byte $68, $65, $6c, $6c, $6f, $20, $77, $6f, $72, $6c, $64, $21
+                .byte $E8, $E5, $Ec, $Ec, $Ef, $A0, $F7, $Ef, $F2, $Ec, $E4, $A1
             #endif
             #if PLATFORM_ATARI || PLATFORM_BEEB
                 .byte $68, $65, $6c, $6c, $6f, $00, $77, $6f, $72, $6c, $64, $01
