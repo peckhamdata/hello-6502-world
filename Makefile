@@ -1,9 +1,9 @@
-# Commodore/Atari 8 bit toolchain
-
+AC_JAR=$(AC_HOME)/AppleCommander-ac-1.5.0.jar
 KICKASS_JAR=$(KICK_HOME)/KickAss.jar
 C1541=$(VICE_HOME)/tools/c1541
 PRG2BBC=$(BEEB_HOME)/bin/prg2bbc.py
 CREATE_SSD=$(BEEB_HOME)/bin/ssd_create.py
+
 PROG=hello
 EMU=x64
 PLATFORM=C64 # APPLEII
