@@ -1,3 +1,6 @@
 *.d64
 *.prg
 *.sym
+*.bin
+*.dsk
+*.b2
