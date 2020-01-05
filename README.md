@@ -37,8 +37,8 @@ Install depenencies with `install_tools.sh`
 
 * VIC / C64 - [VICE](http://vice-emu.sourceforge.net/index.html#download) - Export `VICE_HOME` to point to your VICE install dir
 * Atari 8 Bit - [Atari 800 mac X](https://www.atarimac.com/atari800macx.php)
-* BBC [BeebEm](http://www.mkw.me.uk/beebem/)
-* Apple II[Virtual II](http://www.virtualii.com/)
+* BBC [BeebEm] - (http://www.mkw.me.uk/beebem/)
+* Apple II[Virtual II] - (http://www.virtualii.com/)
 
 ## Build and run
 
