@@ -45,6 +45,11 @@ listl:      lda dlist,x
     *=$0803
 #endif
 
+#if PLATFORM_ORIC
+.var screen = $BB80
+    *=$0800
+#endif
+
 start:      ldx #$00
 loop:       lda message,x
             sta screen,x
@@ -65,6 +70,9 @@ message:
             #endif
             #if PLATFORM_ATARI || PLATFORM_BEEB
                 .byte $68, $65, $6c, $6c, $6f, $00, $77, $6f, $72, $6c, $64, $01
+            #endif
+            #if PLATFORM_ORIC
+                .byte $68, $65, $6c, $6c, $6f, $20, $77, $6f, $72, $6c, $64, $21
             #endif
 
 #if PLATFORM_ATARI

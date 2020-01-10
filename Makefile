@@ -58,6 +58,11 @@ $(PROG).bin: $(PROG).b2
 $(PROG).b2: $(PROG).prg	
 	prg2xex < $(PROG).prg > $(PROG).b2
 
+# ORIC
+
+$(PROG).tap: $(PROG).prg
+	prg2tap < $(PROG).prg > $(PROG).tap
+
 # All
 
 $(PROG).$(OBJ):$(PROG).asm *.asm

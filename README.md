@@ -5,6 +5,8 @@
 Aim is to have a working toolchain that can do all the machine specific
 stuff to get it running on an emulator and real hardware.
 
+In order of appearance:
+
 Commodore 64:
 
 ![Commodore 64](assets/hello-world-c64.png)
@@ -25,6 +27,10 @@ Apple II:
 
 ![Apple II](assets/hello-world-appleii.png)
 
+Oric:
+
+![Oric](assets/hello-world-oric.png)
+
 # Usage
 
 ## Dependencies
@@ -37,8 +43,9 @@ Install depenencies with `install_tools.sh`
 
 * VIC / C64 - [VICE](http://vice-emu.sourceforge.net/index.html#download) - Export `VICE_HOME` to point to your VICE install dir
 * Atari 8 Bit - [Atari 800 mac X](https://www.atarimac.com/atari800macx.php)
-* BBC [BeebEm](http://www.mkw.me.uk/beebem/)
-* Apple II[Virtual II](http://www.virtualii.com/)
+* BBC - [BeebEm](http://www.mkw.me.uk/beebem/)
+* Apple II - [Virtual II](http://www.virtualii.com/)
+* Oric - [Oric](https://www.bannister.org/software/oric.htm)
 
 ## Build and run
 
@@ -49,5 +56,6 @@ Install depenencies with `install_tools.sh`
 * `Atari 8-bit` - `make PLATFORM=ATARI EMU=open PACKAGE=xex`
 * `BBC Micro` - `make PLATFORM=BEEB EMU=open PACKAGE=ssd`
 * `Apple II` - `make PLATFORM=APPLEII EMU=open PACKAGE=dsk`
+* `ORIC` - `make hello.tap PLATFORM=ORIC` then open the tap file in the emulator.
 
 You'll need to `make clean` when switching platforms.

@@ -28,6 +28,7 @@ unzip master.zip
 cd ..
 
 pip3 install prg2xex
+pip3 install prg2tap
 
 echo "Setting environment variables"
 export KICK_HOME=./tools
